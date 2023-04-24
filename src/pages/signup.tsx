@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { createOrReturnFirebaseApp } from '@/firebase-init';
 
 export default function SignUp() {
@@ -27,7 +27,7 @@ export default function SignUp() {
 
         await sendEmailVerification(user);
 
-        router.push('/homepage');
+        router.push('/verify-email');
       } catch (err) {
         alert('An error has occurred when trying to create your account');
 
