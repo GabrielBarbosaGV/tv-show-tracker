@@ -15,8 +15,8 @@ export default function Home() {
         </button>
 
         <div className="flex flex-row m-2">
-          <span className="mx-1">Don&lsquot have an account yet?</span>
-          <Link href="/signup">Sign up</Link>
+          <span className="mx-1">Don&lsquo;t have an account yet?</span>
+          <Link href="/signup" className="underline">Sign up</Link>
         </div>
       </div>
     </div>

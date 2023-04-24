@@ -73,7 +73,7 @@ export default function SignUp() {
       </form>
 
       {isLoading
-        ? <span>Please hold as you&lsquotre logged in...</span>
+        ? <span>Please hold as you&lsquo;re logged in...</span>
         : <></>}
       
     </div>
