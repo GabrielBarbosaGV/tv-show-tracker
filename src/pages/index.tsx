@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -14,8 +15,8 @@ export default function Home() {
         </button>
 
         <div className="flex flex-row m-2">
-          <span className="mx-1">Don't have an account yet?</span>
-          <a href="/signup" className="underline">Sign up</a>
+          <span className="mx-1">Don&lsquot have an account yet?</span>
+          <Link href="/signup">Sign up</Link>
         </div>
       </div>
     </div>
