@@ -10,7 +10,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col">
-        <button className="bg-red-400 p-4 rounded-full" onClick={() => signIn('firebase', { callbackUrl: '/homepage' })}>
+        <button className="bg-red-400 p-4 rounded-full" onClick={() => signIn('firebase', { redirect: true, callbackUrl: '/homepage' })}>
           Login to start
         </button>
 
