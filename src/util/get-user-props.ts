@@ -16,7 +16,8 @@ export const getUserProps: ContextUser<UserProps> = async _ => {
     props: {
       user: {
         emailVerified: currentUser?.emailVerified ?? false,
-        email: currentUser?.email
+        email: currentUser?.email,
+        uid: currentUser?.uid
       }
     }
   };
