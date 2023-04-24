@@ -19,15 +19,15 @@ export default function SignUp() {
       alert('The given password and password confirmation do not match');
     } else {
       try {
-        setIsLoading(true);
-
         const auth = getAuth(createOrReturnFirebaseApp());
 
         const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
         await sendEmailVerification(user);
 
-        router.push('/verify-email');
+        router.replace('/verify-email');
+
+        setIsLoading(true);
       } catch (err) {
         alert('An error has occurred when trying to create your account');
 
