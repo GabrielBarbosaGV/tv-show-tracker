@@ -1,5 +1,23 @@
+import { createOrReturnFirebaseApp } from '@/firebase-init';
+import { getAuth } from 'firebase/auth';
+import { GetServerSideProps } from 'next';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+
+export const getServerSideProps: GetServerSideProps = async _ => {
+  const { currentUser } = getAuth(createOrReturnFirebaseApp());
+
+  if (currentUser) {
+    return {
+      redirect: {
+        destination: '/homepage',
+        permanent: true
+      }
+    };
+  }
+
+  return { props: {} };
+};
 
 export default function Home() {
   return (
@@ -10,7 +28,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col">
-        <button className="bg-red-400 p-4 rounded-full" onClick={() => signIn('firebase', { redirect: true, callbackUrl: '/homepage' })}>
+        <button className="bg-red-400 p-4 rounded-full" onClick={() => signIn()}>
           Login to start
         </button>
 
