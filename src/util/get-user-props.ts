@@ -5,7 +5,8 @@ import { getAuth } from "firebase/auth";
 interface UserProps {
   user: {
     emailVerified: boolean,
-    email: string | null | undefined
+    email: string | null | undefined,
+    uid: string | null | undefined
   }
 }
 
