@@ -16,7 +16,7 @@ export default function VerifyEmail() {
 
       <button
         className="bg-red-400 rounded-full p-2 m-4"
-        onClick={() => signIn('firebase', { redirect: true, callbackUrl: '/homepage' })}
+        onClick={() => signIn()}
       >
         Login
       </button>
