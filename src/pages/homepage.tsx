@@ -7,10 +7,14 @@ import { checkUnauthorizedOrEmailNotVerifiedThen } from "@/util/check-unauthoriz
 import { getUserProps } from "@/util/get-user-props";
 import { InferGetServerSidePropsType } from "next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export const getServerSideProps = checkUnauthorizedOrEmailNotVerifiedThen(getUserProps);
 
 export default function HomePage({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter();
+
   const emailName = useMemo(() => user.email ? getEmailName(user.email) : null, [user.email]);
 
   const [isAddingShow, setIsAddingShow] = useState(false);
@@ -47,6 +51,12 @@ export default function HomePage({ user }: InferGetServerSidePropsType<typeof ge
     }
   };
 
+  const handleSignOut = async () => {
+    await fetch(`/api/sign-out`);
+
+    router.replace('/');
+  };
+
   return (
     <div className="w-[100vw] h-[100vh] flex flex-col justify-center items-center">
       <div className="">
@@ -68,6 +78,10 @@ export default function HomePage({ user }: InferGetServerSidePropsType<typeof ge
           View or edit an existing show
         </ShadowedBox>
       </div>
+
+      <button className="bg-gray-400 p-2 rounded-md" onClick={() => handleSignOut()}>
+        Sign out
+      </button>
 
       {hasJustAddedShow && <span className="text-blue-500">Show added successfully</span>}
 
