@@ -6,6 +6,7 @@ import { Subject, debounceTime, distinctUntilChanged, mergeMap } from "rxjs";
 import { checkUnauthorizedOrEmailNotVerifiedThen } from "@/util/check-unauthorized-or-email-not-verified-then";
 import { getUserProps } from "@/util/get-user-props";
 import { InferGetServerSidePropsType } from "next";
+import Link from "next/link";
 
 export const getServerSideProps = checkUnauthorizedOrEmailNotVerifiedThen(getUserProps);
 
@@ -194,7 +195,7 @@ interface SearchShowsProps {
 
 const SearchShows: React.FC<SearchShowsProps> = ({ uid }: SearchShowsProps) => {
   const [searchResults, setSearchResults] = useState<Show[]>([]);
-  
+
   const search = useMemo(() => {
     const searchSubject = new Subject<string>();
 
@@ -218,11 +219,13 @@ const SearchShows: React.FC<SearchShowsProps> = ({ uid }: SearchShowsProps) => {
       <div className="grid grid-cols-4 overflow-auto bg-gray-200 rounded-md p-3 m-4">
 
         {searchResults.map(show => (
-          <div className="shadow-black shadow-md p-4 text-center bg-white m-4" key={show.id!}>
-            <span className="text-xl">
-              {show.name}
-            </span>
-          </div>
+          <Link href={`/show/${encodeURIComponent(show.name)}`}>
+            <div className="shadow-black shadow-md p-4 text-center bg-white m-4" key={show.id!}>
+              <span className="text-xl">
+                {show.name}
+              </span>
+            </div>
+          </Link>
         ))}
       </div>
     </>
