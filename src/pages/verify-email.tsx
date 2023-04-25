@@ -1,4 +1,4 @@
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
 
 export default function VerifyEmail() {
   return (
@@ -14,10 +14,7 @@ export default function VerifyEmail() {
         </p>
       </div>
 
-      <button
-        className="bg-red-400 rounded-full p-2 m-4"
-        onClick={() => signIn()}
-      >
+      <button className="bg-red-400 rounded-full p-2 m-4" onClick={() => signIn()}>
         Login
       </button>
     </div>
