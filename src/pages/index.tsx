@@ -1,10 +1,10 @@
-import { createOrReturnFirebaseApp } from '@/firebase-init';
-import { getAuth } from 'firebase/auth';
-import { GetServerSideProps } from 'next';
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { createOrReturnFirebaseApp } from '@/firebase-init';
+import { GetServerSideProps } from 'next';
+import { getAuth } from 'firebase/auth';
 
-export const getServerSideProps: GetServerSideProps = async _ => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { currentUser } = getAuth(createOrReturnFirebaseApp());
 
   if (currentUser) {
@@ -13,10 +13,14 @@ export const getServerSideProps: GetServerSideProps = async _ => {
         destination: '/homepage',
         permanent: true
       }
-    };
+    }
   }
 
-  return { props: {} };
+  return {
+    props: {
+
+    }
+  };
 };
 
 export default function Home() {
@@ -27,7 +31,7 @@ export default function Home() {
         <h3 className="text-xl">Track smarter, not harder</h3>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-center items-center">
         <button className="bg-red-400 p-4 rounded-full" onClick={() => signIn()}>
           Login to start
         </button>
