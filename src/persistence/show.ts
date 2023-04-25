@@ -7,7 +7,14 @@ export interface Show {
   uid: string,
   name: string,
   lastEpisodeWatched: string,
-  nextIntendedEpisode: string
+  nextIntendedEpisode: string,
+  imdbLinkDetails?: ImdbLinkDetails
+}
+
+export interface ImdbLinkDetails {
+  title: string,
+  imageUrl: string,
+  plot: string
 }
 
 const db = createOrReturnFirestore();
@@ -16,8 +23,11 @@ export const addShow = async (show: Show) => {
   await addDoc(collection(db, 'shows'), show);
 };
 
-export const getShowByNameAndUid = async(name: string, uid: string) => {
+export const getShowDocByNameAndUid = async (name: string, uid: string) => {
   const docsRef = await getDocs(query(collection(db, 'shows'), where('name', '==', name), where('uid', '==', uid)));
 
-  return docsRef.docs.at(0)?.data() as Show;
-};
+  return docsRef.docs.at(0);
+}
+
+export const getShowByNameAndUid = async (name: string, uid: string) =>
+  (await getShowDocByNameAndUid(name, uid))?.data() as Show;
