@@ -1,4 +1,26 @@
+import { createOrReturnFirebaseApp } from "@/firebase-init";
+import { getAuth } from "firebase/auth";
+import { GetServerSideProps } from "next";
 import { signIn } from "next-auth/react";
+
+export const getServerSideProps: GetServerSideProps = async _ => {
+  const { currentUser } = getAuth(createOrReturnFirebaseApp());
+
+  if (currentUser) {
+    return {
+      redirect: {
+        destination: "/homepage",
+        permanent: true
+      }
+    }
+  }
+
+  return {
+    props: {
+
+    }
+  };
+};
 
 export default function VerifyEmail() {
   return (
